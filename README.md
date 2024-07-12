@@ -20,7 +20,20 @@ Follow the instructions to download the LOM dataset in [Aleth-NeRF](https://gith
 
 ```
 # bike
-$python ./source/main.py --config ./source/configs/lom.yaml --pipeline test --checkpoint ./source/ckpt/last.ckpt && python run.py --ginc configs/LOM/nerf/nerf_bike.gin --logbase ./logs --ginb run.run_train=False 
+python ./source/main.py --config ./source/configs/lom.yaml --pipeline test --checkpoint ./source/ckpt/last.ckpt --data.init_args.data_root ./data/LOM_full/bike/ && python run.py --ginc configs/LOM/nerf/nerf_bike.gin --logbase ./logs --ginb run.run_train=False
+
+# buu
+python ./source/main.py --config ./source/configs/lom.yaml --pipeline test --checkpoint ./source/ckpt/last.ckpt --data.init_args.data_root ./data/LOM_full/buu/ && python run.py --ginc configs/LOM/nerf/nerf_buu.gin --logbase ./logs --ginb run.run_train=False
+
+# chair
+python ./source/main.py --config ./source/configs/lom.yaml --pipeline test --checkpoint ./source/ckpt/last.ckpt --data.init_args.data_root ./data/LOM_full/chair/ && python run.py --ginc configs/LOM/nerf/nerf_chair.gin --logbase ./logs --ginb run.run_train=False
+
+# shrub
+python ./source/main.py --config ./source/configs/lom.yaml --pipeline test --checkpoint ./source/ckpt/last.ckpt --data.init_args.data_root ./data/LOM_full/shrub/ && python run.py --ginc configs/LOM/nerf/nerf_shrub.gin --logbase ./logs --ginb run.run_train=False
+
+# sofa
+python ./source/main.py --config ./source/configs/lom.yaml --pipeline test --checkpoint ./source/ckpt/last.ckpt --data.init_args.data_root ./data/LOM_full/sofa/ && python run.py --ginc configs/LOM/nerf/nerf_sofa.gin --logbase ./logs --ginb run.run_train=False
 ```
+
 
 
