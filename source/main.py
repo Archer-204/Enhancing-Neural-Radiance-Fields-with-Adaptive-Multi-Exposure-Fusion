@@ -11,6 +11,7 @@ from pytorch_lightning import Callback, LightningDataModule, LightningModule
 import torch
 import yaml
 from torchvision.utils import save_image
+import argparse
 
 class SaveTestImagesCallback(Callback):
     def __init__(self, src_dir):
@@ -67,6 +68,8 @@ class CustomLightningCLI(LightningCLI):
         parser.add_argument("--checkpoint")
         parser.add_argument("--dirpath", default='./source/ckpt', help="Directory where to save the checkpoints")
         parser.add_argument("--test_image_dir", default='./test_images', help="Directory where to save the test images")
+        parser.add_argument("--data_root")
+
 
     def before_fit(self):
         os.makedirs(self.config["dirpath"], exist_ok=True)
@@ -82,7 +85,7 @@ class CustomLightningCLI(LightningCLI):
 if __name__ == "__main__":
     with open('./source/configs/lom.yaml', 'r') as file:
         config = yaml.safe_load(file)
-        # print(config)
+       
     cli = CustomLightningCLI(
         subclass_mode_model=True,
         subclass_mode_data=True,
@@ -109,7 +112,7 @@ if __name__ == "__main__":
         cli.trainer.fit(cli.model, cli.datamodule, ckpt_path=cli.config["checkpoint"])
     elif cli.config["pipeline"] == "test":
         save_test_images_callback = SaveTestImagesCallback(
-            src_dir=config['data']['init_args']['data_root']
+            src_dir=cli.config['data']['init_args']['data_root']
         )
         cli.trainer.callbacks.append(save_test_images_callback)
         cli.trainer.test(cli.model, cli.datamodule, ckpt_path=cli.config["checkpoint"])
