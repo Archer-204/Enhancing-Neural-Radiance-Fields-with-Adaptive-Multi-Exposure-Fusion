@@ -175,9 +175,16 @@ def run(
         trainer.fit(model, data_module, ckpt_path=ckpt_path)
 
     if run_eval:  # Evaluation
-        ckpt_path = (
-            f"./pretrained/last.ckpt"
-        )
+        if scene_name == "bike":
+            ckpt_path = (f"./pretrained/bike/last.ckpt")
+        elif scene_name == "buu":
+            ckpt_path = (f"./pretrained/buu/best.ckpt")
+        elif scene_name == "chair":
+            ckpt_path = (f"./pretrained/chair/best.ckpt")
+        elif scene_name == "shrub":
+            ckpt_path = (f"./pretrained/shrub/best.ckpt")
+        elif scene_name == "sofa":
+            ckpt_path = (f"./pretrained/sofa/best.ckpt")
         print('the checkpoint path is:', ckpt_path)
         trainer.test(model, data_module, ckpt_path=ckpt_path)
 
